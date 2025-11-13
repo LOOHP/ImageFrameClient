@@ -22,7 +22,7 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
     modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
-    modApi("com.terraformersmc:modmenu:16.0.0-rc.1")
+    modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
 }
 
 processResources {
