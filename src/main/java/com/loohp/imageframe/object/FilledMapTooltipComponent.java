@@ -1,6 +1,5 @@
 package com.loohp.imageframe.object;
 
-import com.loohp.imageframe.ImageFrameClient;
 import com.loohp.imageframe.configuration.Configuration;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;

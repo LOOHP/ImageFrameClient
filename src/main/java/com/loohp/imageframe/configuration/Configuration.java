@@ -19,9 +19,9 @@ public class Configuration extends MidnightConfig {
     public static boolean notifyWhenServerSupports = true;
 
     @Override
-    public void writeChanges() {
+    public void writeChanges(String modid) {
         ImageFrameClient.MOD.clearLoadedHdMaps();
-        super.writeChanges();
+        super.writeChanges(modid);
     }
 
 }
