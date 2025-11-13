@@ -4,15 +4,17 @@ import com.loohp.imageframe.ImageFrameClient;
 import com.loohp.imageframe.configuration.Configuration;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.MapRenderState;
 import net.minecraft.client.render.MapRenderer;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.component.type.MapIdComponent;
 import net.minecraft.item.map.MapState;
 import net.minecraft.util.Identifier;
-import org.joml.Matrix3x2fStack;
+
+import static net.minecraft.client.render.LightmapTextureManager.MAX_LIGHT_COORDINATE;
 
 public class ImageMapTooltipComponent implements MapTooltipComponent {
 
@@ -75,7 +77,7 @@ public class ImageMapTooltipComponent implements MapTooltipComponent {
         int tileSizePxInt = Math.max(1, (int) Math.floor(usableH / gridRows));
         // Background width that matches our layout
         int mapWidth = getWidth(imageMapData);
-        context.drawTexture(RenderPipelines.GUI_TEXTURED, background, x, y, 0, 0, mapWidth, 64, mapWidth, 64);
+        context.drawTexture(RenderLayer::getGuiTextured, background, x, y, 0, 0, mapWidth, 64, mapWidth, 64);
         // Grid dimensions for centering (NO overlap involved)
         float gridW = gridCols * tileSizePxInt + PAD_PX * 2f;
         float gridH = gridRows * tileSizePxInt + PAD_PX * 2f;
@@ -86,7 +88,7 @@ public class ImageMapTooltipComponent implements MapTooltipComponent {
         float overlap = 0.25f; // adjust 0.2–0.5 if needed
         float tileScale = (tileSizePxInt + overlap) / 128f;
         MapRenderer mapRenderer = client.getMapRenderer();
-        Matrix3x2fStack matrix = context.getMatrices();
+        MatrixStack matrix = context.getMatrices();
         for (int i = 0; i < imageMapData.mapIds().size(); i++) {
             MapIdComponent id = new MapIdComponent(imageMapData.mapIds().getInt(i));
             int col = i % gridCols;
@@ -99,13 +101,13 @@ public class ImageMapTooltipComponent implements MapTooltipComponent {
             // Integer stride + constant device-px padding
             float drawX = originX + PAD_PX + col * tileSizePxInt;
             float drawY = originY + PAD_PX + row * tileSizePxInt;
-            matrix.pushMatrix();
-            matrix.translate(drawX, drawY);
+            matrix.push();
+            matrix.translate(drawX, drawY, 1F);
             // Apply overlap symmetrically so it doesn't “eat” the padding
-            matrix.translate(-overlap * 0.5f, -overlap * 0.5f);
-            matrix.scale(tileScale, tileScale);
-            context.drawMap(mapRenderState);
-            matrix.popMatrix();
+            matrix.translate(-overlap * 0.5f, -overlap * 0.5f, 1F);
+            matrix.scale(tileScale, tileScale, 1F);
+            context.draw(vertexConsumers -> mapRenderer.draw(mapRenderState, matrix, vertexConsumers, true, MAX_LIGHT_COORDINATE));
+            matrix.pop();
         }
     }
 

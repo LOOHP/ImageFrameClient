@@ -3,15 +3,17 @@ package com.loohp.imageframe.object;
 import com.loohp.imageframe.configuration.Configuration;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.MapRenderState;
 import net.minecraft.client.render.MapRenderer;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.component.type.MapIdComponent;
 import net.minecraft.item.map.MapState;
 import net.minecraft.util.Identifier;
-import org.joml.Matrix3x2fStack;
+
+import static net.minecraft.client.render.LightmapTextureManager.MAX_LIGHT_COORDINATE;
 
 public class FilledMapTooltipComponent implements MapTooltipComponent {
 
@@ -39,7 +41,7 @@ public class FilledMapTooltipComponent implements MapTooltipComponent {
         if (!Configuration.previewMapsInTooltip) {
             return;
         }
-        context.drawTexture(RenderPipelines.GUI_TEXTURED, background, x, y, 0, 0, 64, 64, 64, 64);
+        context.drawTexture(RenderLayer::getGuiTextured, background, x, y, 0, 0, 64, 64, 64, 64);
         MinecraftClient client = MinecraftClient.getInstance();
         ClientWorld world  = client.world;
         if (world == null) {
@@ -49,14 +51,14 @@ public class FilledMapTooltipComponent implements MapTooltipComponent {
         if (data == null) {
             return;
         }
-        Matrix3x2fStack matrix = context.getMatrices();
-        matrix.pushMatrix();
-        matrix.translate(x + 3.2F, y + 3.2F);
-        matrix.scale(0.45F, 0.45F);
+        MatrixStack matrix = context.getMatrices();
+        matrix.push();
+        matrix.translate(x + 3.2F, y + 3.2F, 1F);
+        matrix.scale(0.45F, 0.45F, 1F);
         MapRenderer mapRenderer = client.getMapRenderer();
         mapRenderer.update(id, data, mapRenderState);
-        context.drawMap(mapRenderState);
-        matrix.popMatrix();
+        context.draw(vertexConsumers -> mapRenderer.draw(mapRenderState, matrix, vertexConsumers, true, MAX_LIGHT_COORDINATE));
+        matrix.pop();
     }
 
 }

@@ -95,7 +95,7 @@ public class ImageFrameClient implements ModInitializer {
                             if (data.length > 0) {
                                 NativeImage nativeImage = resizeToPreference(NativeImage.read(data));
                                 Identifier id = Identifier.of("imageframe", "hdmap_" + mapId);
-                                NativeImageBackedTexture tex = new NativeImageBackedTexture(id::getPath, nativeImage);
+                                NativeImageBackedTexture tex = new NativeImageBackedTexture(nativeImage);
                                 tex.setFilter(false, false);
                                 MinecraftClient.getInstance().getTextureManager().registerTexture(id, tex);
                                 loadedHdImages.put(mapId, Optional.of(id));
@@ -128,7 +128,7 @@ public class ImageFrameClient implements ModInitializer {
                             pendingMultipart.invalidate(multipartId);
                             NativeImage nativeImage = resizeToPreference(NativeImage.read(info.complete()));
                             Identifier id = Identifier.of("imageframe", "hdmap_" + mapId);
-                            NativeImageBackedTexture tex = new NativeImageBackedTexture(id::getPath, nativeImage);
+                            NativeImageBackedTexture tex = new NativeImageBackedTexture(nativeImage);
                             tex.setFilter(false, false);
                             MinecraftClient.getInstance().getTextureManager().registerTexture(id, tex);
                             loadedHdImages.put(mapId, Optional.of(id));
