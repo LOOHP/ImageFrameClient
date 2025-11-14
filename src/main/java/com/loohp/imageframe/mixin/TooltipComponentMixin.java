@@ -4,6 +4,8 @@ import com.loohp.imageframe.object.FilledMapTooltipComponent;
 import com.loohp.imageframe.object.FilledMapTooltipData;
 import com.loohp.imageframe.object.ImageMapTooltipComponent;
 import com.loohp.imageframe.object.ImageMapTooltipData;
+import com.loohp.imageframe.object.PaintingTooltipComponent;
+import com.loohp.imageframe.object.PaintingTooltipData;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.item.tooltip.TooltipData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,6 +19,10 @@ public interface TooltipComponentMixin {
     @Inject(at = @At("HEAD"), cancellable = true, method = "of(Lnet/minecraft/item/tooltip/TooltipData;)Lnet/minecraft/client/gui/tooltip/TooltipComponent;")
     private static void of(TooltipData tooltipData, CallbackInfoReturnable<TooltipComponent> cir) {
         switch (tooltipData) {
+            case PaintingTooltipData paintingTooltipData -> {
+                cir.setReturnValue(new PaintingTooltipComponent(paintingTooltipData.paintingVariant()));
+                cir.cancel();
+            }
             case FilledMapTooltipData filledMapTooltipData -> {
                 cir.setReturnValue(new FilledMapTooltipComponent(filledMapTooltipData.mapId()));
                 cir.cancel();

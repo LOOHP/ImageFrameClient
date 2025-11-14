@@ -16,6 +16,9 @@ public class Configuration extends MidnightConfig {
     public static boolean previewMapsInTooltip = true;
 
     @Entry
+    public static boolean previewPaintingsInTooltip = true;
+
+    @Entry
     public static boolean notifyWhenServerSupports = true;
 
     @Override
