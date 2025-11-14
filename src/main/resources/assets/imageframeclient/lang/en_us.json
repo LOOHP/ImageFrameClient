@@ -6,6 +6,8 @@
   "imageframeclient.midnightconfig.maxImageSize.tooltip": "The maximum pixels a map can have on each side.",
   "imageframeclient.midnightconfig.previewMapsInTooltip": "Preview Maps in Tooltip",
   "imageframeclient.midnightconfig.previewMapsInTooltip.tooltip": "Preview maps when you hover over them in your inventory.",
+  "imageframeclient.midnightconfig.previewPaintingsInTooltip": "Preview Paintings in Tooltip",
+  "imageframeclient.midnightconfig.previewPaintingsInTooltip.tooltip": "Preview paintings when you hover over them in your inventory.",
   "imageframeclient.midnightconfig.notifyWhenServerSupports": "Notify when Server Supports ImageFrame Client",
   "imageframeclient.midnightconfig.notifyWhenServerSupports.tooltip": "Show a toast message when you join a server if they support ImageFrame client.",
   "imageframeclient.midnightconfig.enum.Resolution.NATIVE": "Native",

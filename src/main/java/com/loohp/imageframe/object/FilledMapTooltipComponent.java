@@ -1,6 +1,5 @@
 package com.loohp.imageframe.object;
 
-import com.loohp.imageframe.configuration.Configuration;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gl.RenderPipelines;
@@ -36,9 +35,6 @@ public class FilledMapTooltipComponent implements MapTooltipComponent {
 
     @Override
     public void drawItems(TextRenderer textRenderer, int x, int y, int width, int height, DrawContext context) {
-        if (!Configuration.previewMapsInTooltip) {
-            return;
-        }
         context.drawTexture(RenderPipelines.GUI_TEXTURED, background, x, y, 0, 0, 64, 64, 64, 64);
         MinecraftClient client = MinecraftClient.getInstance();
         ClientWorld world  = client.world;

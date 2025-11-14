@@ -1,7 +1,6 @@
 package com.loohp.imageframe.object;
 
 import com.loohp.imageframe.ImageFrameClient;
-import com.loohp.imageframe.configuration.Configuration;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gl.RenderPipelines;
@@ -56,9 +55,6 @@ public class ImageMapTooltipComponent implements MapTooltipComponent {
 
     @Override
     public void drawItems(TextRenderer textRenderer, int x, int y, int width, int height, DrawContext context) {
-        if (!Configuration.previewMapsInTooltip) {
-            return;
-        }
         MinecraftClient client = MinecraftClient.getInstance();
         ClientWorld world = client.world;
         if (world == null) {
