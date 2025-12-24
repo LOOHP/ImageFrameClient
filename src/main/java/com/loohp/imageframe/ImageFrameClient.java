@@ -73,8 +73,8 @@ public class ImageFrameClient implements ModInitializer {
                         SystemToast.create(
                                 MinecraftClient.getInstance(),
                                 SystemToast.Type.UNSECURE_SERVER_WARNING,
-                                Text.translatable("message.server_supported.title").formatted(Formatting.GOLD),
-                                Text.translatable("message.server_supported.description")
+                                Text.translatable("imageframeclient.message.server_supported.title").formatted(Formatting.GOLD),
+                                Text.translatable("imageframeclient.message.server_supported.description")
                         )
                 );
             }
@@ -96,7 +96,6 @@ public class ImageFrameClient implements ModInitializer {
                                 NativeImage nativeImage = resizeToPreference(NativeImage.read(data));
                                 Identifier id = Identifier.of("imageframe", "hdmap_" + mapId);
                                 NativeImageBackedTexture tex = new NativeImageBackedTexture(id::getPath, nativeImage);
-                                tex.setFilter(false, false);
                                 MinecraftClient.getInstance().getTextureManager().registerTexture(id, tex);
                                 loadedHdImages.put(mapId, Optional.of(id));
                             }
@@ -129,7 +128,6 @@ public class ImageFrameClient implements ModInitializer {
                             NativeImage nativeImage = resizeToPreference(NativeImage.read(info.complete()));
                             Identifier id = Identifier.of("imageframe", "hdmap_" + mapId);
                             NativeImageBackedTexture tex = new NativeImageBackedTexture(id::getPath, nativeImage);
-                            tex.setFilter(false, false);
                             MinecraftClient.getInstance().getTextureManager().registerTexture(id, tex);
                             loadedHdImages.put(mapId, Optional.of(id));
                         }
