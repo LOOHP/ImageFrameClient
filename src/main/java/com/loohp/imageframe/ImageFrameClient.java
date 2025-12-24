@@ -73,8 +73,8 @@ public class ImageFrameClient implements ModInitializer {
                         SystemToast.create(
                                 MinecraftClient.getInstance(),
                                 SystemToast.Type.UNSECURE_SERVER_WARNING,
-                                Text.translatable("message.server_supported.title").formatted(Formatting.GOLD),
-                                Text.translatable("message.server_supported.description")
+                                Text.translatable("imageframeclient.message.server_supported.title").formatted(Formatting.GOLD),
+                                Text.translatable("imageframeclient.message.server_supported.description")
                         )
                 );
             }
