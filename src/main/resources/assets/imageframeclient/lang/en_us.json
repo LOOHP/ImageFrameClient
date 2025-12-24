@@ -17,6 +17,6 @@
   "imageframeclient.midnightconfig.enum.Resolution.MAX_512": "512x",
   "imageframeclient.midnightconfig.enum.Resolution.MAX_256": "256x",
   "imageframeclient.midnightconfig.enum.Resolution.MAX_128": "128x",
-  "message.server_supported.title": "ImageFrame Client Supported Server",
-  "message.server_supported.description": "This server has ImageFrame and will show images in native resolution and full color!"
+  "imageframeclient.message.server_supported.title": "ImageFrame Client Supported Server",
+  "imageframeclient.message.server_supported.description": "This server has ImageFrame and will show images in native resolution and full color!"
 }
