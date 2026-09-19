@@ -20,9 +20,9 @@
     "imageframeclient.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.18.6",
+    "fabricloader": ">=0.19.5",
     "fabric-api": "*",
-    "minecraft": "~26.2",
+    "minecraft": "~26.3",
     "java": ">=25"
   },
   "contact": {
