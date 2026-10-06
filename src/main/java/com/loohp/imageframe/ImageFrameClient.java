@@ -21,9 +21,9 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
@@ -156,7 +156,7 @@ public class ImageFrameClient implements ModInitializer {
             }
         });
 
-        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
             imageMapData.clear();
             for (int mapId : new IntOpenHashSet(loadedHdImages.keySet())) {
                 Optional<Identifier> id = loadedHdImages.remove(mapId);
